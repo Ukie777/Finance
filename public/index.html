@@ -1,12 +1,18 @@
-<form id="transactionForm">
-    <input type="date" id="date" required>
-    <input type="number" id="amount" required>
-    <input type="text" id="category" required>
-    <select id="type">
-      <option value="income">Income</option>
-      <option value="expense">Expense</option>
-    </select>
-    <button type="submit">Add Transaction</button>
-  </form>
-  <script src="app.js"></script>
-  
+<form id="orderForm">
+    <input type="text" id="customerName" placeholder="Customer Name" required>
+    <div id="itemsContainer">
+        <div class="item">
+            <input type="text" class="itemName" placeholder="Item Name" required>
+            <input type="number" class="itemQuantity" placeholder="Quantity" required>
+            <input type="number" class="itemPrice" placeholder="Price" required>
+        </div>
+    </div>
+    <button type="button" id="addItem">Add More Items</button>
+    <button type="submit">Place Order</button>
+    <button onclick="completeOrder(orderId)">Complete Order</button>
+</form>
+
+<div id="orderDisplay"></div>
+<script src="app.js"></script>
+
+
