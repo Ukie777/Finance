@@ -53,6 +53,13 @@ app.get('/orders', async (req, res) => {
   res.status(200).send(orders);
 });
 
+app.get('/orders', async (req, res) => {
+  const { customerName } = req.query;
+  const filter = customerName ? { customerName: new RegExp(customerName, 'i') } : {};
+  const orders = await Order.find(filter);
+  res.status(200).send(orders);
+});
+
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });

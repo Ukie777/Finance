@@ -52,6 +52,32 @@ document.getElementById('orderForm').addEventListener('submit', async (event) =>
     loadOrders(); // 刷新顯示訂單列表
   };
 
+  const searchOrder = async () => {
+    const customerName = document.getElementById('searchInput').value;
+    const response = await fetch(`http://localhost:3000/orders?customerName=${customerName}`);
+    const orders = await response.json();
+  
+    const orderDisplay = document.getElementById('orderDisplay');
+    orderDisplay.innerHTML = ''; // 清空之前的訂單內容
+  
+    orders.forEach(order => {
+      const orderElement = document.createElement('div');
+      orderElement.innerHTML = `
+        <p>客戶名稱: ${order.customerName}</p>
+        <p>訂單金額: $${order.totalAmount}</p>
+      `;
+      orderDisplay.appendChild(orderElement);
+    });
+    orders.forEach(order => {
+        const orderElement = document.createElement('div');
+        orderElement.innerHTML = `
+          <p>${order.customerName}</p>
+          <button onclick="deleteOrder('${order._id}')">Delete</button>
+        `;
+        document.getElementById('orderDisplay').appendChild(orderElement);
+      });
+  };
+
   async function displayOrders() {
     const response = await fetch('http://localhost:3000/orders');
     const orders = await response.json();
